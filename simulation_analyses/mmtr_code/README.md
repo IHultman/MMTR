@@ -1,3 +1,4 @@
+<pre>
 After running the 'construct_mmtr_sims.R' script, you should have a 
 directory with multiple sets of simulated data, structured as follows:
 
@@ -73,3 +74,4 @@ For sim_set_2:
   > Rscript run_mmtr_for_equicorr_sim_analysis.R "./simulated_equicorr_data" 2 "./results_save_dir/"
 
 so on and so forth.
+</pre>
