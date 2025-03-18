@@ -1,5 +1,5 @@
 <pre>
-After running the 'construct_mmtr_sims.R' and 'mmmtr_sim_rdata_to_mat.R' 
+After running the 'construct_mmtr_sims.R' and 'mmtr_sim_rdata_to_mat.R' 
 scripts, you should have a directory with multiple sets of simulated data, 
 structured as follows:
 
