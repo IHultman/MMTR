@@ -1,3 +1,4 @@
+<pre>
 After running the 'construct_mmtr_sims.R' and 'mmmtr_sim_rdata_to_mat.R' 
 scripts, you should have a directory with multiple sets of simulated data, 
 structured as follows:
@@ -75,3 +76,4 @@ For sim_set_2:
   > matlab -nodisplay -nodesktop -nosplash -r "run_gee_for_equicorr_sim_analysis ./simulated_equicorr_matlab_data ./results_save_dir/ 2"
 
 so on and so forth.
+</pre>
