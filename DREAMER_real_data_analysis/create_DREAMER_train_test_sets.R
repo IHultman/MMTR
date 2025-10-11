@@ -1,7 +1,7 @@
 library(R.matlab)
 
 
-processed_dreamer_filename = "./processed_DREAMER.mat";
+processed_dreamer_filename = "./processed_DREAMER_by_freq_bands.mat";
 
 mmtr_save_dir = "./mmtr_DREAMER_train_test_sets";
 

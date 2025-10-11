@@ -1,8 +1,7 @@
 dreamer_filename = './DREAMER.mat';
-save_filename = './processed_DREAMER.mat';
+save_filename = './processed_DREAMER_by_freq_bands.mat';
 
 n_sec_per_video = 60;
-min_freq = 1;
 max_freq = 50;
 
 dreamer_data = load(dreamer_filename);
@@ -15,7 +14,7 @@ max_freq = min(max_freq, fs / 2);
 n_dim = dreamer_data.noOfSubjects;
 m_dim = dreamer_data.noOfVideoSequences;
 
-n_scores = 3;
+n_scores = 4;
 
 channames = dreamer_data.EEG_Electrodes;
 n_chans = length(channames);
@@ -23,15 +22,29 @@ n_chans = length(channames);
 n_fft = n_sec_per_video * fs;
 freq_orig = reshape(0:(1 / n_sec_per_video):(fs / 2), [], 1);
 
-nearest_freq_int = round(freq_orig);
-ixs_valid_freq = ( ...
-  (min_freq <= nearest_freq_int) & ...
-  (nearest_freq_int <= max_freq) );
+freq_band_info = table( ...
+  reshape(1:5, [], 1), ...
+  {'Delta'; 'Theta'; 'Alpha'; 'Beta'; 'Gamma'}, ...
+  [0.5; 4; 8; 12; 30], ...
+  [4; 8; 12; 30; max_freq], ...
+  'VariableNames', {'freq_group_id', 'freq_group', 'lb_freq', 'ub_freq'});
 
-nearest_freq_int = nearest_freq_int(ixs_valid_freq);
-[freq_group_map, freq_group_labels] = findgroups(nearest_freq_int);
+freq_group_ids = nan(length(freq_orig), 1);
 
-n_freq = length(freq_group_labels);
+for bx = 1:size(freq_band_info, 1)
+  ixs_bx = ( ...
+    (freq_band_info.lb_freq(bx) <= freq_orig) & ...
+    (freq_orig < freq_band_info.ub_freq(bx) ));
+
+  freq_group_ids(ixs_bx) = freq_band_info.freq_group_id(bx);
+end
+
+ixs_valid_freq = ~isnan(freq_group_ids);
+
+freq_group_ids = freq_group_ids(ixs_valid_freq);
+[freq_group_map, freq_groups] = findgroups(freq_group_ids);
+
+n_freq = length(freq_groups);
 
 eeg_stim_logpower = nan([n_freq, n_chans, m_dim, n_dim]);
 scores = nan([m_dim, n_scores, n_dim]);
@@ -59,14 +72,15 @@ for ix = 1:n_dim
   scores(:,1,ix) = dreamer_data.Data{ix}.ScoreValence;
   scores(:,2,ix) = dreamer_data.Data{ix}.ScoreArousal;
   scores(:,3,ix) = dreamer_data.Data{ix}.ScoreDominance;
+  scores(:,4,ix) = arrayfun(@(ix_row) sqrt(sum(scores(ix_row,1:3,ix).^2) ), 1:m_dim);
 end
 
 save_struct = struct();
 save_struct.eeg_stim_logpower = eeg_stim_logpower;
 save_struct.scores = scores;
-save_struct.freq = reshape(freq_group_labels, 1, []);
+save_struct.freq = reshape(freq_band_info.freq_group, 1, []);
 save_struct.chans = channames;
-save_struct.score_labels = {'Valence', 'Arousal', 'Dominance'};
+save_struct.score_labels = {'Valence', 'Arousal', 'Dominance', 'Length'};
 save_struct.age = cellfun(@(data_ix) str2double(data_ix.Age), dreamer_data.Data);
 save_struct.gender = cellfun(@(data_ix) data_ix.Gender, dreamer_data.Data, 'UniformOutput', false);
 
