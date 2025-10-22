@@ -98,7 +98,7 @@ stopifnot(
 
 stopifnot(is.element(DREAMER_score_label, colnames(DREAMER_data$y_train) ));
 
-y = DREAMER_data$y_train[[DREAMER_score_label]];
+y = scale(DREAMER_data$y_train[[DREAMER_score_label]]);
 X = DREAMER_data$X_train;
 Z = DREAMER_data$X_train;
 group_ids = DREAMER_data$group_ids_train;

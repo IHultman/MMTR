@@ -100,7 +100,7 @@ stopifnot(
 stopifnot(is.element(DREAMER_score_label, colnames(DREAMER_data$y_train) ));
 stopifnot(is.element(DREAMER_score_label, colnames(DREAMER_data$y_test) ));
 
-y_train = DREAMER_data$y_train[,DREAMER_score_label];
+y_train = scale(DREAMER_data$y_train[,DREAMER_score_label]);
 
 t_dim = 3;
 m_dim_train = length(y_train);
@@ -144,7 +144,9 @@ quasi_rand_eff_var = Varcomp.est(
 sigma_Z = G_list[[1]] * quasi_rand_eff_var$eta.hat;
 blup = compute_blup_quasi(resids, Z_train, sigma_Z, group_ids_train);
 
-y_test = DREAMER_data$y_test[,DREAMER_score_label];
+y_test = (
+  (DREAMER_data$y_test[,DREAMER_score_label] - attributes(y_train)$"scaled:center") /
+  attributes(y_train)$"scaled:scale");
 
 m_dim_test = length(y_test);
 
