@@ -10,13 +10,13 @@ annotations_filename = file.path(
   "annotations",
   "annotations averaged per song",
   "dynamic (per second annotations)",
-  "arousal.csv");
+  "valence.csv");
 
 features_dir = "./DEAM_raw_data/features/features";
 
 save_filename = file.path(
-  "./DEAM_raw_data",
-  "DEAM_preprocessed_data_averaged_across_rater_arousal_response.RData");
+  "./DEAM_train_test_sets_in_order_times",
+  "DEAM_preprocessed_data_averaged_across_rater_valence_response.RData");
 
 # Use only the songs whose ID's are between 1001 and 2000. The data for this set of songs
 # are all of length approximately 43 seconds.
@@ -40,32 +40,34 @@ time_labels_map_init = data.frame(
   time=as.numeric(str_extract(time_labels_init, "(?<=^sample_)[0-9]+(?=ms$)") ) / 1000);
 
 feat_grps_patterns = c(
-  "audSpec_Rfilt_sma%s.0._%s",
-  "audSpec_Rfilt_sma%s.1._%s",
-  "audSpec_Rfilt_sma%s.2._%s",
-  "audSpec_Rfilt_sma%s.3._%s",
-  "audSpec_Rfilt_sma%s.4._%s",
-  "audSpec_Rfilt_sma%s.5._%s",
-  "audSpec_Rfilt_sma%s.6._%s",
-  "audSpec_Rfilt_sma%s.7._%s",
-  "audSpec_Rfilt_sma%s.8._%s",
-  "audSpec_Rfilt_sma%s.9._%s",
-  "audSpec_Rfilt_sma%s.10._%s",
-  "audSpec_Rfilt_sma%s.11._%s",
-  "audSpec_Rfilt_sma%s.12._%s",
-  "audSpec_Rfilt_sma%s.13._%s",
-  "audSpec_Rfilt_sma%s.14._%s",
-  "audSpec_Rfilt_sma%s.15._%s",
-  "audSpec_Rfilt_sma%s.16._%s",
-  "audSpec_Rfilt_sma%s.17._%s",
-  "audSpec_Rfilt_sma%s.18._%s",
-  "audSpec_Rfilt_sma%s.19._%s",
-  "audSpec_Rfilt_sma%s.20._%s",
-  "audSpec_Rfilt_sma%s.21._%s",
-  "audSpec_Rfilt_sma%s.22._%s",
-  "audSpec_Rfilt_sma%s.23._%s",
-  "audSpec_Rfilt_sma%s.24._%s",
-  "audSpec_Rfilt_sma%s.25._%s",
+#  "audSpec_Rfilt_sma%s.0._%s",
+#  "audSpec_Rfilt_sma%s.1._%s",
+#  "audSpec_Rfilt_sma%s.2._%s",
+#  "audSpec_Rfilt_sma%s.3._%s",
+#  "audSpec_Rfilt_sma%s.4._%s",
+#  "audSpec_Rfilt_sma%s.5._%s",
+#  "audSpec_Rfilt_sma%s.6._%s",
+#  "audSpec_Rfilt_sma%s.7._%s",
+#  "audSpec_Rfilt_sma%s.8._%s",
+#  "audSpec_Rfilt_sma%s.9._%s",
+#  "audSpec_Rfilt_sma%s.10._%s",
+#  "audSpec_Rfilt_sma%s.11._%s",
+#  "audSpec_Rfilt_sma%s.12._%s",
+#  "audSpec_Rfilt_sma%s.13._%s",
+#  "audSpec_Rfilt_sma%s.14._%s",
+#  "audSpec_Rfilt_sma%s.15._%s",
+#  "audSpec_Rfilt_sma%s.16._%s",
+#  "audSpec_Rfilt_sma%s.17._%s",
+#  "audSpec_Rfilt_sma%s.18._%s",
+#  "audSpec_Rfilt_sma%s.19._%s",
+#  "audSpec_Rfilt_sma%s.20._%s",
+#  "audSpec_Rfilt_sma%s.21._%s",
+#  "audSpec_Rfilt_sma%s.22._%s",
+#  "audSpec_Rfilt_sma%s.23._%s",
+#  "audSpec_Rfilt_sma%s.24._%s",
+#  "audSpec_Rfilt_sma%s.25._%s",
+  "pcm_fftMag_fband250.650_sma%s_%s",
+  "pcm_fftMag_fband1000.4000_sma%s_%s",
   "pcm_fftMag_spectralRollOff25.0_sma%s_%s",
   "pcm_fftMag_spectralRollOff50.0_sma%s_%s",
   "pcm_fftMag_spectralRollOff75.0_sma%s_%s",
