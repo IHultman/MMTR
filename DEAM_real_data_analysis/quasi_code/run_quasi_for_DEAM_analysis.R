@@ -188,7 +188,7 @@ quasi_info = list(
 save_filename = file.path(
   save_dir,
   sprintf(
-    "%s_valence_quasi_results.RData",
+    "%s_arousal_quasi_results.RData",
     file_path_sans_ext(DEAM_data_filename_fx) ));
 
 saveRDS(quasi_info, save_filename);
