@@ -65,11 +65,8 @@ predict_mmtr = function(
   grps_info_table$ax = cumsum(c(1, grps_info_table$m_gx[-n_dim]) );
   grps_info_table$bx = cumsum(grps_info_table$m_gx);
 
-  print(grps_info_table);
-
   # Check to make sure group ordering matches.
   for (gx in 1:n_dim) {
-    print(gx);
     grp_gx_ixs = grps_info_table$ax[gx]:grps_info_table$bx[gx];
     stopifnot(all(group_ids_test[grp_gx_ixs] == grps_info_table$grp_id[gx]) );
   }
