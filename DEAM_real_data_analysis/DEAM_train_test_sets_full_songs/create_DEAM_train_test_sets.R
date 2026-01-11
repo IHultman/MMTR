@@ -2,9 +2,9 @@ library(dplyr)
 library(R.matlab)
 
 
-DEAM_data_fname = "./DEAM_preprocessed_data_averaged_across_rater_valence_response.RData";
+DEAM_data_fname = "./DEAM_preprocessed_data_averaged_across_rater_PC1_response.RData";
 
-r_save_dir = "./mmtr_DEAM_valence_train_test_sets";
+r_save_dir = "./mmtr_DEAM_PC1_600_songs_train_test_sets";
 
 if (!file.exists(r_save_dir) ) {
   dir.create(r_save_dir);
@@ -12,7 +12,7 @@ if (!file.exists(r_save_dir) ) {
 
 stopifnot(dir.exists(r_save_dir) );
 
-matlab_save_dir = "./kruskal_DEAM_valence_train_test_sets";
+matlab_save_dir = "./kruskal_DEAM_PC1_600_songs_train_test_sets";
 
 if (!file.exists(matlab_save_dir) ) {
   dir.create(matlab_save_dir);

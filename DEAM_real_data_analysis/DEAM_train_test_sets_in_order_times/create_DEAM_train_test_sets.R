@@ -4,7 +4,7 @@ library(R.matlab)
 
 DEAM_data_fname = "./DEAM_preprocessed_data_averaged_across_rater_PC1_response.RData";
 
-r_save_dir = "./mmtr_DEAM_PC1_300_songs_train_test_sets";
+r_save_dir = "./mmtr_DEAM_PC1_600_songs_train_test_sets";
 
 if (!file.exists(r_save_dir) ) {
   dir.create(r_save_dir);
@@ -12,7 +12,7 @@ if (!file.exists(r_save_dir) ) {
 
 stopifnot(dir.exists(r_save_dir) );
 
-matlab_save_dir = "./kruskal_DEAM_PC1_300_songs_train_test_sets";
+matlab_save_dir = "./kruskal_DEAM_PC1_600_songs_train_test_sets";
 
 if (!file.exists(matlab_save_dir) ) {
   dir.create(matlab_save_dir);
@@ -53,7 +53,7 @@ n_test_obs_per_grp = 7;
 n_train_test_sets = 10;
 
 # Must be less than the total number of songs.
-n_songs_subset = 300;
+n_songs_subset = 600;
 
 # Must be between 0 and 1.
 percent_test_songs = 0.75;
