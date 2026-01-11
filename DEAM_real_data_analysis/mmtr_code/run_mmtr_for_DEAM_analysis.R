@@ -103,7 +103,7 @@ n_reps = 1000;
 conv_thrsh = 0.001;
 
 B_lambda_range = c(1e-4, 0.05);
-L_lambda_range = c(1e-4, 1);
+L_lambda_range = c(1e-4, 5);
 
 n_B_lambdas = 10;
 n_L_lambdas = 10;
