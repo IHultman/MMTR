@@ -130,7 +130,7 @@ DEAM_lam_sweep_results = lambda_sweep_mmtr(
 save_filename = file.path(
   save_dir,
   sprintf(
-    "%s_arousal_lambda_sweep_results.RData",
+    "%s_PC1_lambda_sweep_results.RData",
     file_path_sans_ext(DEAM_data_filename_fx) ));
 
 saveRDS(DEAM_lam_sweep_results, save_filename);
