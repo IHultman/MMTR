@@ -102,8 +102,8 @@ group_ids = DEAM_data$group_ids_train;
 n_reps = 1000;
 conv_thrsh = 0.001;
 
-B_lambda_range = c(1e-4, 0.05);
-L_lambda_range = c(1e-4, 5);
+B_lambda_range = c(1e-4, 0.04);
+L_lambda_range = c(1e-4, 10);
 
 n_B_lambdas = 10;
 n_L_lambdas = 10;
