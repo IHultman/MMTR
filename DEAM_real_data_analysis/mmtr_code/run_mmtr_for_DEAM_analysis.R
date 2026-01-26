@@ -103,7 +103,7 @@ n_reps = 1000;
 conv_thrsh = 0.001;
 
 B_lambda_range = c(1e-4, 0.04);
-L_lambda_range = c(1e-4, 10);
+L_lambda_range = c(1e-4, 1);
 
 n_B_lambdas = 10;
 n_L_lambdas = 10;
@@ -130,7 +130,7 @@ DEAM_lam_sweep_results = lambda_sweep_mmtr(
 save_filename = file.path(
   save_dir,
   sprintf(
-    "%s_PC1_lambda_sweep_results.RData",
+    "%s_arousal_lambda_sweep_results.RData",
     file_path_sans_ext(DEAM_data_filename_fx) ));
 
 saveRDS(DEAM_lam_sweep_results, save_filename);
